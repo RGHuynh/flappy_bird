@@ -33,6 +33,8 @@ end
 function love.draw()
   Push:start()
   love.graphics.draw(Background, 0, 0)
+  -- 16 is the pixel height of the ground image
+  -- We need to subtract it from the virtual height to see the ground on screen
   love.graphics.draw(Ground, 0, VIRTUAL_HEIGHT - 16)
   Push:finish()
 end
