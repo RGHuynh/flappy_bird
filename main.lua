@@ -1,4 +1,7 @@
-Push = require 'push'
+local Push = require 'push'
+
+local Bird = require 'Bird'
+
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -26,6 +29,8 @@ function love.load()
     fullscreen = false,
     resizable = true
   })
+
+  FlyingBird = Bird:new()
 end
 
 function love.resize(w, h)
@@ -43,11 +48,15 @@ function love.update(dt)
   print(backgroundScroll)
 
   groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
+
+  FlyingBird:update(dt)
 end
 
 function love.draw()
   Push:start()
   love.graphics.draw(Background, -backgroundScroll, 0)
+
+  FlyingBird:render()
   -- 16 is the pixel height of the ground image
   -- We need to subtract it from the virtual height to see the ground on screen
   love.graphics.draw(Ground, -groundScroll, VIRTUAL_HEIGHT - 16)
