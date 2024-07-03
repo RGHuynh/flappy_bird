@@ -1,7 +1,7 @@
 local Bird = {}
 Bird.__index = Bird
 
-local GRAVITY = 20
+local GRAVITY = 5
 
 function Bird:new()
   local bird = {}
@@ -24,8 +24,12 @@ function Bird:new()
 end
 
 function Bird:update(dt)
-  self.dy = self.dy + GRAVITY * dt
-
+  if love.keyboard.isDown('space') then
+    self.dy = -1
+    print(self.dy)
+  else
+    self.dy = self.dy + GRAVITY * dt
+  end
   self.y = self.y + self.dy
 end
 
