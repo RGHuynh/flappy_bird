@@ -1,7 +1,7 @@
 local Bird = {}
 Bird.__index = Bird
 
-local GRAVITY = 5
+local GRAVITY = 20
 
 function Bird:new()
   local bird = {}
@@ -24,15 +24,13 @@ function Bird:new()
 end
 
 function Bird:update(dt)
-  if love.keyboard.isDown('space') then
-    self.dy = -1
-    print(self.dy)
-  else
-    self.dy = self.dy + GRAVITY * dt
+  self.dy = self.dy + GRAVITY * dt
+  if love.keyboard.wasPressed('space') then
+    self.dy = -5
   end
+
   self.y = self.y + self.dy
 end
-
 function Bird:render()
   love.graphics.draw(self.image, self.x, self.y)
 end
